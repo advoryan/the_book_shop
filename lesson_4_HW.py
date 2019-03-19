@@ -13,20 +13,25 @@ db = {
         'Рост':172,
         'ИМТ':20,
         'Рекомендация':"Вы в хорошей форме! Так держать!"}}
-log_db = {'a':"111", 'b':"222"}
+log_db = {'a':"111", 'b':"222"} # <<<<< НАЧАЛЬНЫЕ ЛОГИНЫ И ПАРОЛИ ДЛЯ ВХОДА!!!!
 log_status = False
 import functools
 
 # Главное меню
 def main_menu():
     global select
+    if log_status is True:
+        nnn = str("Здравствуйте, " + str(log_name) + "!")
+    else:
+        nnn = "Вы не зарегестрированы и не имеете доступ к данным!"
     print(
         "\nМеню калькулятора BMI:\n",
-        "Ваш log in статус: " + str(log_status) + "\n",
+        "Ваш статус: " + nnn + "\n",
         "1 - Вывести список пользователей (Сейчас:", str(len(db)) + ")\n",
         "2 - Добавить пользователя\n",
         "3 - Удалить пользователя\n",
         "4 - Выбрать пользователя\n",
+        "--------------------------------------------------------\n",
         "5 - ЗАЛОГИНЬТЕСЬ!!!!\n",
         "6 - ЗАРЕГИСТРИРУЙТЕСЬ\n",
         "7 - Выход")
@@ -34,44 +39,45 @@ def main_menu():
     print("\n")
     return select
 
-# Проверка залогинен или нет (подготовка обертки)
+# Только проверка залогинен или нет (подготовка обертки)
 def login_required(fn):
     global log_status
     def wrapper():
-        print(log_status)
+        # print(log_status)
         if log_status == False:
             return log_in()
         else:
             return fn()
     return wrapper
             
-# Только ввод логина и пароля ПЕРЕДЕЛАТЬ НА ВНЕСЕНИЕ ПАРОЛЯ
+# Только ввод логина и пароля + изменение статуса при удачном логине
 def log_in():
     global log_db
     global log_status
+    global log_name
+    print("Зарегистрируйтесь для доступа к данным калькулятора BMI!")
     log_name = str(input("Login: "))
     log_pass = str(input("Password: "))
     if log_name in log_db:
         if str(log_pass) != log_db[log_name]:
-            print("Неверный пароль!!!")
+            print("\nНеверный пароль!!!")
         else:
             log_status = True
-            print("Добро пожаловать,", str(log_name))
+            print("\nДобро пожаловать,", str(log_name))
     else:
-        print("Нет такого пользователя! Пожалуйста, зарегистрируйтесь!")
-        # переход на регистрацию нового пользователя
-    # return log_name, log_pass
+        print("\nНет такого пользователя! Пожалуйста, зарегистрируйтесь!")
+        acc_create()
 
-# # ЗАМЫКАНИЕ ПРОВЕРКИ
-# def checki(aaa):
-#     def sel_function():
-#         print(aaa)
-#         if aaa == True:
-#             if select == 1: show_user()
-#             elif select == 2: add_user()
-#             elif select == 3: del_user()
-#             elif select == 4: detail_user()
-#     return sel_function()
+def acc_create():
+    global log_db
+    print("\n------- РЕГИСТРАЦИЯ НОВОГО ПОЛЬЗОВАТЕЛЯ -------")
+    wish_log = str(input("Желаемый логин: "))
+    if wish_log in log_db:
+        print ("\nК сожалению, такой логин уже существует! Пожалуйста, выберите другой\n")
+        acc_create()
+    else:
+        wish_pass = str(input("Введите ваш будущий пароль: "))
+        log_db[wish_log] = wish_pass
 
 # Вывод списка пользователей
 @login_required
@@ -285,21 +291,17 @@ def detail_user():
 while True:
 
     main_menu()
-    # sel_function()""
-    # checki(login_check)
-    
     
     if select == 1: show_user()
     elif select == 2: add_user()
     elif select == 3: del_user()
     elif select == 4: detail_user()
-
-    if select == 5:
-        log_in()
-        # if log_status == False: log_status = True
-        # else:
-        #     if log_status == True: log_status = False
-
+    elif select == 5: log_in()
+    elif select == 6: acc_create()
+    elif select == 0: 
+        if log_status == False: log_status = True
+        else:
+            if log_status == True: log_status = False
     # Выход
     if select == 7:
         print("Всего хорошего!")
