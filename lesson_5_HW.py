@@ -1,21 +1,16 @@
-db = {
-    'Саша':{
-        'Возраст':33,
-        'Пол':"м",
-        'Вес':120,
-        'Рост':185,
-        'ИМТ':36,
-        'Рекомендация':"У Вас большой избыточный вес! Рекомендуем обратиться к врачу!"},
-    'Маша':{
-        'Возраст':25,
-        'Пол':"ж",
-        'Вес':60,
-        'Рост':172,
-        'ИМТ':20,
-        'Рекомендация':"Вы в хорошей форме! Так держать!"}}
-log_db = {'a':"111", 'b':"222"} # <<<<< НАЧАЛЬНЫЕ ЛОГИНЫ И ПАРОЛИ ДЛЯ ВХОДА!!!!
-log_status = False
-import functools
+import pickle
+db = dict()
+log_db = dict()
+
+# Загрузка словаря с данными пользователей из файла
+with open("lesson_5_data.txt", "rb") as fb:
+    db = pickle.load(fb)
+
+with open("lesson_5_login.txt", "rb") as fb:
+    log_db = pickle.load(fb)
+
+# log_db = {'a':"111", 'b':"222"} # <<<<< НАЧАЛЬНЫЕ ЛОГИНЫ И ПАРОЛИ ДЛЯ ВХОДА!!!!
+log_status = False 
 
 # Главное меню
 def main_menu():
@@ -78,6 +73,10 @@ def acc_create():
     else:
         wish_pass = str(input("Введите ваш будущий пароль: "))
         log_db[wish_log] = wish_pass
+        
+        # Сохранение нового набора логинов и паролей
+        with open("lesson_5_login.txt", "wb") as fb:
+            pickle.dump(log_db, fb)
 
 # Вывод списка пользователей
 @login_required
@@ -209,6 +208,10 @@ def add_user():
             'ИМТ':round(bmi, 0),
             'Рекомендация':result
             }
+        
+        # Сохранение новой базы данных в файле
+        with open("lesson_5_data.txt", "wb") as fb:
+            pickle.dump(db, fb)
 
 # Удаление выбранного пользователя
 @login_required
@@ -239,6 +242,10 @@ def del_user():
             if del_name in a:
                 del (db[db_names[n_user]])
             print("")
+            
+            # Сохранение новой базы данных в файле уже без пользователя :(
+            with open("lesson_5_data.txt", "wb") as fb:
+                pickle.dump(db, fb)
 
 # Выбор пользователя (получение детальной информации)
 @login_required
@@ -305,4 +312,5 @@ while True:
     # Выход
     if select == 7:
         print("Всего хорошего!")
+        fb.close
         break
