@@ -40,3 +40,5 @@ print(mod)
 
 a_shifted = mod.shift(5, 5)
 print(a_shifted)
+
+aaa = a_shifted.length()

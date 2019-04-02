@@ -1,0 +1,25 @@
+    
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Contacts</title>
+    <style>
+        p {text-align: center}
+    </style>
+</head>
+<body>
+<table align="left" width="400" border="0">
+    <colgroup>
+        <col width="50%">
+        <col width="50%">
+        <col width="50%">
+    </colgroup>
+    <tr><th>Имя</th><th>Профессия</th><th>Телефон</th></tr>
+    {% for key in list%}
+        <tr><td>{{key.0}}</td><td>{{key.1}}</td><td>{{key.2}}</td></tr>
+        <br>
+    {% endfor %}
+</table>
+</body>
+</html>
