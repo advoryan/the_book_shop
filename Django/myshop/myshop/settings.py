@@ -39,7 +39,8 @@ DEFAULT_APPS = [
 ]
 
 MY_APPS = [
-    'home',
+    # 'home',
+    'dictionaries',
 ]
 
 INSTALLED_APPS = DEFAULT_APPS + MY_APPS
