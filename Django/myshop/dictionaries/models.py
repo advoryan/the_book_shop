@@ -1,37 +1,71 @@
 from django.db import models
 
-class Serie(models.Model):
-    name = models.CharField("Серия", max_length=20) # Название колонки, можно ли быть пустым для БД, то же для валюдаторов джанго и макс длинна
-    description = models.TextField("Описание", max_length=2000) # Нет ограничения по длинне и подефолтных
+class Author(models.Model):
+    first_name = models.CharField("Фамилия", null=False, blank=False, max_length=30)
+    last_name = models.CharField("Имя", null=True, blank=True, max_length=30)
+    country = models.CharField("Страна", null=True, blank=True, max_length=20)
+
+    def __str__(self):  # что происходит, если объект выводят на печать
+        return self.first_name
+
+    class Meta:
+        verbose_name = 'Автор'
+        verbose_name_plural = 'Авторы'
+
+
+class Genre2(models.Model):
+    name = models.CharField("Название", null=False, blank=False, max_length=25)
+
     def __str__(self):
         return self.name
 
-class Genre(models.Model):
-    GENRE_CH = (
-        ('Ф', 'Фантастика'),
-        ('Д', 'Детективы'),
-        ('Р', 'Рассказ'),
-        ('Б', 'Биография'),
-        ('У', 'Учебные материалы'),
-        ('М', 'Манга')
-    )
-    genre_type = models.CharField("Название жанра", max_length=1, choices=GENRE_CH)
-    genre_description = models.CharField("Описание жанра", max_length=300)
-
-class Author(models.Model):
-    author_first_name = models.CharField("Имя автора", max_length=80)
-    author_last_name = models.CharField("Фамилия автора", max_length=80)
-    author_country = models.CharField("Страна", max_length=80)
-
-class Publisher(models.Model):
-    publisher_name = models.CharField("Имя автора", max_length=80)
-    publisher_adress = models.CharField("Фамилия автора", max_length=80)
-    publisher_country = models.CharField("Страна", max_length=80)
-
-class Meta:
-    ordering = ["name"] # сортировка по имени
-    verobose_name = "Серии" 
-    verobose_name_plural = "Серии" 
+    class Meta:
+        verbose_name = "Жанр"
+        verbose_name_plural = 'Жанры'
 
 
-# 
+class Series(models.Model):
+    name = models.CharField("Название", null=False, blank=False, max_length=30)
+    description = models.TextField("Описание", null=True, blank=True)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Серия'
+        verbose_name_plural = 'Серии'
+
+
+class Publish(models.Model):
+    name = models.CharField("Название", null=False, blank=False, max_length=50)
+    country = models.CharField("Страна", null=True, blank=True, max_length=20)
+    city = models.CharField("Город", null=True, blank=True, max_length=20)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Издательство'
+        verbose_name_plural = 'Издательства'
+
+
+class Binding(models.Model):
+    binding_type = models.CharField("Тип", null=False, blank=False, max_length=30)
+
+    def __str__(self):
+        return self.binding_type
+
+    class Meta:
+        verbose_name = 'Переплет'
+        verbose_name_plural = 'Виды переплетов'
+
+
+class BookFormat(models.Model):
+    size = models.CharField("Размер", null=False, blank=False, max_length=30)
+
+    def __str__(self):
+        return self.size
+
+    class Meta:
+        verbose_name = 'Формат'
+        verbose_name_plural = 'Форматы'

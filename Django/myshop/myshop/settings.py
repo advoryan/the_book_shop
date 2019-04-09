@@ -41,6 +41,7 @@ DEFAULT_APPS = [
 MY_APPS = [
     # 'home',
     'dictionaries',
+    'books', # Dj3 добавляем приложение 
 ]
 
 INSTALLED_APPS = DEFAULT_APPS + MY_APPS
