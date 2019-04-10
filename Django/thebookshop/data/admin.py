@@ -11,7 +11,7 @@ class AuthorAdmin(admin.ModelAdmin):
         model = Author
 
 admin.site.register(Author, AuthorAdmin)
-admin.site.register(Genre2)
+admin.site.register(Genre)
 admin.site.register(Series)
 admin.site.register(Publish)
 admin.site.register(Binding)

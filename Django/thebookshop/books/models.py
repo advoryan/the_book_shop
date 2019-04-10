@@ -15,7 +15,7 @@ class Book(models.Model):
 
     # можно выбрать несколько авторов
     author = models.ManyToManyField(
-        "dictionaries.Author",
+        "data.Author",
         related_name="books",
         verbose_name="Автор")
 
@@ -26,7 +26,7 @@ class Book(models.Model):
 
     # можно выбрать одну серию
     serie = models.ForeignKey(
-        "dictionaries.Series",
+        "data.Series",
         related_name="books",
         verbose_name="Серия",
         null=True,
@@ -34,8 +34,8 @@ class Book(models.Model):
         on_delete=models.PROTECT)
 
     # можно выбрать несколько жанров
-    genre2 = models.ManyToManyField(
-        "dictionaries.Genre2",
+    genre = models.ManyToManyField(
+        "data.Genre",
         related_name="books",
         blank=True,
         verbose_name="Жанр")
@@ -51,14 +51,14 @@ class Book(models.Model):
         blank=True)
 
     bind = models.ForeignKey(
-        "dictionaries.Binding",
+        "data.Binding",
         verbose_name="Переплет",
         null=True,
         blank=True,
         on_delete=models.PROTECT)
 
     book_format = models.ForeignKey(
-        "dictionaries.BookFormat",
+        "data.BookFormat",
         verbose_name="Формат",
         null=True,
         blank=True,
@@ -81,7 +81,7 @@ class Book(models.Model):
         blank=True,)
 
     publish = models.ForeignKey(
-        "dictionaries.Publish",
+        "data.Publish",
         verbose_name="Издательство",
         null=True,
         blank=True,
