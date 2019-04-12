@@ -1,8 +1,8 @@
 from django.db import models
 
 class Author(models.Model):
-    first_name = models.CharField("Фамилия", null=False, blank=False, max_length=30)
-    last_name = models.CharField("Имя", null=False, blank=False, max_length=30)
+    first_name = models.CharField("Имя", null=False, blank=False, max_length=30)
+    last_name = models.CharField("Фамилия", null=False, blank=False, max_length=30)
     country = models.CharField("Страна", null=False, blank=False, max_length=20)
     def __str__(self): # печать
         return self.first_name
@@ -52,5 +52,3 @@ class BookFormat(models.Model):
     class Meta:
         verbose_name = 'Формат'
         verbose_name_plural = 'Форматы'
-
-
