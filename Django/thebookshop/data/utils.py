@@ -30,7 +30,7 @@ def obj_count1():
 # 5. Написать скрипт, который наполняет таблицы справочником большим кол-вом объектов
 def create_data():
     a_list = []
-    for i in range(1, 100)):
+    for i in range(1, 100):
         obj = Genre(name='Жанр ' + i)
         a_list.append(obj)
     Genre.objects.bulk_create(a_list)

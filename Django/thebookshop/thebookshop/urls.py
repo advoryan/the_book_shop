@@ -14,8 +14,22 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import include, path
+from data.views import *
+
+# from django.shortcuts import render - старая схема!"!!"
+# def test_view(request):#test 
+#     context = {}
+#     return render(request, "test.html", context) # надо создать test.html !!!!!!
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('data/series/<int:pk>', SeriesDetail.as_view()), # PATH CONVERTER <int:year> - сппециальный ффромированый паттерн. Ждем число интеджер и используем для значения PK
+    # 127.0.0.1:8000/data/series/4 - 4й pk - это что отразить, теперь надо как отобразить (дефолтный или другой)
+    # надо изменить дефолтный шаблон
+    path('data/author/<int:pk>', AuthorDetail.as_view()),
+    path('data/genre/<int:pk>', GenreDetail.as_view()),
+    path('data/publish/<int:pk>', PublishDetail.as_view()),
+    path('data/binding/<int:pk>', BindingDetail.as_view()),
+    path('data/format/<int:pk>', BookFormatDetail.as_view())
 ]
