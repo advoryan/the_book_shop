@@ -112,6 +112,9 @@ class Book(models.Model):
     def __str__(self):
         return self.name
 
+    def new(self):
+        return str(self.price + self.year) # Добавялем новое отображение (в template object.new)
+
     class Meta:
         verbose_name = 'Книга'
         verbose_name_plural = 'Книги'

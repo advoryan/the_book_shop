@@ -1,0 +1,13 @@
+<!-- {% for object in object_list %}
+    <h3>{{ object.pk }} {{ object.name }} {{ object.description }}</h3></br>
+{% endfor %} -->
+<table>
+{% for object in object_list %}
+    {% if object.pk == 1 %}
+<tr>
+    <td><a href="{{% url book-detail-view %}}"></a></td>
+</tr>
+    {% endif %}
+{% endfor %}
+
+</table>

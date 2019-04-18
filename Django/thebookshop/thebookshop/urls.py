@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 from data.views import *
+from books.views import *
 
 # from django.shortcuts import render - старая схема!"!!"
 # def test_view(request):#test 
@@ -24,12 +25,31 @@ from data.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('data/series/<int:pk>', SeriesDetail.as_view()), # PATH CONVERTER <int:year> - сппециальный ффромированый паттерн. Ждем число интеджер и используем для значения PK
+    # path('data/series/<int:pk>', SeriesDetail.as_view()), # PATH CONVERTER <int:year> - сппециальный ффромированый паттерн. Ждем число интеджер и используем для значения PK
     # 127.0.0.1:8000/data/series/4 - 4й pk - это что отразить, теперь надо как отобразить (дефолтный или другой)
     # надо изменить дефолтный шаблон
-    path('data/author/<int:pk>', AuthorDetail.as_view()),
-    path('data/genre/<int:pk>', GenreDetail.as_view()),
-    path('data/publish/<int:pk>', PublishDetail.as_view()),
-    path('data/binding/<int:pk>', BindingDetail.as_view()),
-    path('data/format/<int:pk>', BookFormatDetail.as_view())
+    path('data/series/<int:pk>', SeriesDetail.as_view(), name='series-detail-view'),
+    # path('data/series/<int:pk>/<int:vasia>', SeriesDetail.as_view(), name='series-detail-view'),
+    path('data/series/', SeriesView.as_view(), name='series-list-view'),
+    
+    path('books/<int:pk>', BooksDetail.as_view(), name='books-detail-view'),
+    path('books/', BooksView.as_view()), 
+
+    path('data/author/<int:pk>', AuthorDetail.as_view(), name='author-detail-view'),
+    path('data/author/', AuthorView.as_view()),
+
+    path('data/genre/<int:pk>', GenreDetail.as_view(), name='genre-detail-view'),
+    path('data/genre/', GenreView.as_view()),
+
+    path('data/publish/<int:pk>', PublishDetail.as_view(), name='publish-detail-view'),
+    path('data/publish/', PublishView.as_view()),
+
+    path('data/binding/<int:pk>', BindingDetail.as_view(), name='binding-detail-view'),
+    path('data/binding/', BindingView.as_view()),
+
+    path('data/format/<int:pk>', BookFormatDetail.as_view(), name='bookformat-detail-view'),
+    path('data/format/', BookFormatView.as_view()),
+
+    path('main/', dict_list, name='dict_list')
 ]
+
