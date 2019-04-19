@@ -34,9 +34,17 @@
             <th>Справочники</th>
         </tr>
         <tr>
-            <td><a href="{% url 'series-list-view' %}"></a>11111</td>
+            <tr><td><a href="{% url 'books-list-view' %}">Книги</td></tr>
+            <tr><td><a href="{% url 'series-list-view' %}">Серии</td></tr>
+            <tr><td><a href="{% url 'author-list-view' %}">Авторы</td></tr>
+            <tr><td><a href="{% url 'genre-list-view' %}">Жанры</td></td>
+            <tr><td><a href="{% url 'publish-list-view' %}">Издательства</td></tr>
+            <tr><td><a href="{% url 'binding-list-view' %}">Переплеты</td></tr>
+            <tr><td><a href="{% url 'bookformat-list-view' %}">Форматы</td></tr>
+
+
         </tr>
     </table>
 </body>
 </html>
-<!-- {{ object.name }}  -->
+

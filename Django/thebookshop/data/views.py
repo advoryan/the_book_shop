@@ -1,9 +1,9 @@
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
+from django.views.generic.base import TemplateView
 from .models import *
 from books.views import *
 from books.models import *
-from django.shortcuts import render
 
 class SeriesDetail(DetailView):
     model = Series
@@ -94,7 +94,6 @@ class BookFormatDetail(DetailView):
 
 class BookFormatView(ListView):
     model = BookFormat
-
-def dict_list(request):
-    return render(request, 'data/Dict_List.html', locals())
+class DictView(TemplateView):
+    template_name = "data/Dict_List.html"
 

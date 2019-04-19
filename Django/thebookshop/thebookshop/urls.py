@@ -33,23 +33,23 @@ urlpatterns = [
     path('data/series/', SeriesView.as_view(), name='series-list-view'),
     
     path('books/<int:pk>', BooksDetail.as_view(), name='books-detail-view'),
-    path('books/', BooksView.as_view()), 
+    path('books/', BooksView.as_view(), name='books-list-view'), 
 
     path('data/author/<int:pk>', AuthorDetail.as_view(), name='author-detail-view'),
-    path('data/author/', AuthorView.as_view()),
+    path('data/author/', AuthorView.as_view(), name='author-list-view'),
 
     path('data/genre/<int:pk>', GenreDetail.as_view(), name='genre-detail-view'),
-    path('data/genre/', GenreView.as_view()),
+    path('data/genre/', GenreView.as_view(), name='genre-list-view'),
 
     path('data/publish/<int:pk>', PublishDetail.as_view(), name='publish-detail-view'),
-    path('data/publish/', PublishView.as_view()),
+    path('data/publish/', PublishView.as_view(), name='publish-list-view'),
 
     path('data/binding/<int:pk>', BindingDetail.as_view(), name='binding-detail-view'),
-    path('data/binding/', BindingView.as_view()),
+    path('data/binding/', BindingView.as_view(), name='binding-list-view'),
 
     path('data/format/<int:pk>', BookFormatDetail.as_view(), name='bookformat-detail-view'),
-    path('data/format/', BookFormatView.as_view()),
+    path('data/format/', BookFormatView.as_view(), name='bookformat-list-view'),
 
-    path('main/', dict_list, name='dict_list')
+    path('', DictView.as_view(), name='dict_list')
 ]
 

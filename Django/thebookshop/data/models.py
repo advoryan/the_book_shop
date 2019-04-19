@@ -53,17 +53,3 @@ class BookFormat(models.Model):
     class Meta:
         verbose_name = 'Формат'
         verbose_name_plural = 'Форматы'
-
-class Dict(Book):
-    pass
-    # author = models.ManyToManyField('Author', related_name='dict', verbose_name='Автор')
-    # genre = models.ManyToManyField('Genre', related_name='dict', verbose_name='Жанр')
-    # series = models.ManyToManyField('Series', related_name='dict', verbose_name='Серия')
-    # publish = models.ManyToManyField('Publish', related_name='dict', verbose_name='Издательство')
-    # binding = models.ManyToManyField('Binding', related_name='dict', verbose_name='Переплет')
-    # bookformat = models.ManyToManyField('BookFormat', related_name='dict', verbose_name='формат')
-
-    # class Meta:
-    #     verbose_name = 'Список справочников'
-    #     verbose_name_plural = 'Списки справочников'
-    #     ordering = ['-name']
