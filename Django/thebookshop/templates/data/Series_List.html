@@ -30,6 +30,11 @@
 </head>
 <body>
     <table cellpadding="10px">
+
+            <form action="" method="get">
+                    {{form}} <button type="submit">SEND</button>
+            </form>
+
         <tr>
             <th>Серия</th>
             <th>Описание</th>
@@ -40,6 +45,7 @@
             <td>{{ object.description }}</td>
         </tr>
     {% endfor %}
+
     </table>
 </body>
 </html>

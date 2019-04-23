@@ -28,9 +28,11 @@ urlpatterns = [
     # path('data/series/<int:pk>', SeriesDetail.as_view()), # PATH CONVERTER <int:year> - сппециальный ффромированый паттерн. Ждем число интеджер и используем для значения PK
     # 127.0.0.1:8000/data/series/4 - 4й pk - это что отразить, теперь надо как отобразить (дефолтный или другой)
     # надо изменить дефолтный шаблон
-    path('data/series/<int:pk>', SeriesDetail.as_view(), name='series-detail-view'),
     # path('data/series/<int:pk>/<int:vasia>', SeriesDetail.as_view(), name='series-detail-view'),
+
+    path('data/series/<int:pk>', SeriesDetail.as_view(), name='series-detail-view'),
     path('data/series/', SeriesView.as_view(), name='series-list-view'),
+    # path('data/series/create', SeriesCreateView.as_view(), name='series-list-view'),
     
     path('books/<int:pk>', BooksDetail.as_view(), name='books-detail-view'),
     path('books/', BooksView.as_view(), name='books-list-view'), 
@@ -51,5 +53,6 @@ urlpatterns = [
     path('data/format/', BookFormatView.as_view(), name='bookformat-list-view'),
 
     path('', DictView.as_view(), name='dict_list')
+
 ]
 

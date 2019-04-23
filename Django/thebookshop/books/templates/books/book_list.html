@@ -30,16 +30,32 @@
 </head>
 <body>
     <table cellpadding="10px">
+
+        <form action="" method="get">
+            {{form}} <button type="submit">SEND</button>
+        </form>
+
         <tr>
             <th>Наименование</th>
             <th>Цена</th>
             <th>Дата изменения</th>
+            <th>Автор</th>
+            <th>Серия</th>
+            <th>Жанр</th>
+            <th>Переплет</th>
         </tr>
     {% for object in object_list %}
         <tr>
-          <th>{{ object.name }}</th>
+          <th><a href="{% url 'books-detail-view' object.pk %}"> {{ object.name }} </a></th>
           <td>{{ object.price }}</td>
           <td>{{ object.updated_date }}</td>
+          <td>{% for object in object.author.all %}
+                {{ object.last_name }} {{ object.first_name }}</br>
+              {% endfor %}
+            </td>
+          <td>{{ object.serie }}</td>
+          <td>{{ object.genre }}</td>
+          <td>{{ object.bind }}</td>
         </tr>
     {% endfor %}
     </table>

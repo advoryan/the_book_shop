@@ -1,4 +1,5 @@
 from django.db import models
+from .models import *
 
 class Book(models.Model):
     name = models.CharField(
@@ -29,8 +30,8 @@ class Book(models.Model):
         "data.Series",
         related_name="books",
         verbose_name="Серия",
-        null=True,
-        blank=True,
+        # null=True,
+        # blank=True,
         on_delete=models.PROTECT)
 
     # можно выбрать несколько жанров

@@ -30,16 +30,24 @@
 </head>
 <body>
     <table cellpadding="10px">
+<tr>
+    <form action="" method="get">
+        {{form}} <button type="submit">SEND</button>
+    </form>
+ </tr>
+
         <tr>
             <th>Фамалия</th>
             <th>Имя</th>
             <th>Страна</th>
+            <th>PK</th>
         </tr>
     {% for object in object_list %}
         <tr>
             <th><a href="{% url 'author-detail-view' object.pk %}"> {{ object.last_name }} </a></th>
             <td>{{ object.first_name }}</td>
             <td>{{ object.country }}</td>
+            <td>{{ object.pk }}</td>
         </tr>
     {% endfor %}
     </table>

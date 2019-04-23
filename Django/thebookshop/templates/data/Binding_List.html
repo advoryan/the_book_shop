@@ -30,12 +30,17 @@
 </head>
 <body>
     <table cellpadding="10px">
+        
+        <form action="" method="get">
+        {{form}} <button type="submit">SEND</button>
+        </form>
+
         <tr>
             <th>Тип переплета</th>
         </tr>
     {% for object in object_list %}
         <tr>
-            <th><a href="{% url 'binding-detail-view' object.pk %}"> {{ object.binding_type  }} </a></th>
+            <th><a href="{% url 'binding-detail-view' object.pk %}"> {{ object.binding_type }} </a></th>
         </tr>
     {% endfor %}
     </table>
