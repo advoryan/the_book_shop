@@ -35,23 +35,17 @@
     </style>
 </head>
 <body>
-    <table cellpadding="10px">
 
-            <form action="" method="get">
-                    {{form}} <button type="submit">SEND</button>
-            </form>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Save and list" name="list">
+        <input type="submit" value="Save and detail" name="detail">
+        <input type="submit" value="Save and create" name="create">
+    </form>
 
-        <tr>
-            <th>Серия</th>
-            <th>Описание</th>
-        </tr>
-    {% for object in object_list %}
-        <tr>
-            <th><a href="{% url 'series-detail-view' object.pk %}"> {{ object.name }} </a></th>
-            <td>{{ object.description }}</td>
-        </tr>
-    {% endfor %}
-    </table>
+
+
 </body>
 </html>
 
