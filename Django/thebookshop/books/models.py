@@ -10,7 +10,7 @@ class Book(models.Model):
 
     image = models.ImageField(
         "Обложка",
-        upload_to='book_images/',
+        upload_to='media/img/',
         null=True,
         blank=True)
 
@@ -32,7 +32,7 @@ class Book(models.Model):
         verbose_name="Серия",
         # null=True,
         # blank=True,
-        on_delete=models.PROTECT)
+        on_delete=models.CASCADE)
 
     # можно выбрать несколько жанров
     genre = models.ManyToManyField(
@@ -56,14 +56,14 @@ class Book(models.Model):
         verbose_name="Переплет",
         null=True,
         blank=True,
-        on_delete=models.PROTECT)
+        on_delete=models.CASCADE)
 
     book_format = models.ForeignKey(
         "data.BookFormat",
         verbose_name="Формат",
         null=True,
         blank=True,
-        on_delete=models.PROTECT)
+        on_delete=models.CASCADE)
 
     isbn = models.CharField(
         "ISBN",
@@ -86,7 +86,7 @@ class Book(models.Model):
         verbose_name="Издательство",
         null=True,
         blank=True,
-        on_delete=models.PROTECT)
+        on_delete=models.CASCADE)
 
     book_amount = models.PositiveIntegerField(
         "Кол-во книг в наличии",

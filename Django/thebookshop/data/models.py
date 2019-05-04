@@ -22,7 +22,7 @@ class Genre(models.Model):
         verbose_name_plural = 'Жанры'
 
 class Series(models.Model):
-    # active = models.BooleanField("Активный", default=True)
+    active = models.BooleanField("Активный", default=True)
     # success_url = ......
     name = models.CharField("Название", null=False, blank=False, max_length=30)
     description = models.TextField("Описание", null=True, blank=True)

@@ -46,7 +46,7 @@
         </tr>
     {% for object in object_list %}
         <tr>
-          <th><a href="{% url 'books-detail-view' object.pk %}"> {{ object.name }} </a></th>
+          <th><a href="{% url 'book-detail-view' object.pk %}"> {{ object.name }} </a></th>
           <td>{{ object.price }}</td>
           <td>{{ object.updated_date }}</td>
           <td>{% for object in object.author.all %}

@@ -18,6 +18,8 @@ from django.urls import include, path
 from data.views import *
 from books.views import *
 
+from django.conf.urls.static import static # для просмотра картинок
+
 # from django.shortcuts import render - старая схема!"!!"
 # def test_view(request):#test 
 #     context = {}
@@ -33,9 +35,12 @@ urlpatterns = [
     path('data/series/<int:pk>', SeriesDetail.as_view(), name='series-detail-view'),
     path('data/series/', SeriesView.as_view(), name='series-list-view'),
     path('data/series/create', SeriesCreateView.as_view(), name='series-create-view'),
+    path('data/series/<int:pk>/update', SeriesUpdateView.as_view(), name='series-update-view'),
+    path('data/series/<int:pk>/delete', SeriesDeleteView.as_view(), name='series-delete-view'),
     
-    path('books/<int:pk>', BooksDetail.as_view(), name='books-detail-view'),
-    path('books/', BooksView.as_view(), name='books-list-view'), 
+    # path('books/<int:pk>', BookDetailView.as_view(), name='book-detail-view'),
+    # path('books/', BookListView.as_view(), name='book-list-view'), 
+    # path('books/create', BookCreateView.as_view(), name='book-create-view'), 
 
     path('data/author/<int:pk>', AuthorDetail.as_view(), name='author-detail-view'),
     path('data/author/', AuthorView.as_view(), name='author-list-view'),
@@ -57,7 +62,9 @@ urlpatterns = [
     path('data/format/', BookFormatView.as_view(), name='bookformat-list-view'),
     path('data/format/create', BindingCreateView.as_view(), name='bookformat-create-view'),
 
-    path('', DictView.as_view(), name='dict_list')
+    path('', DictView.as_view(), name='dict_list'),
+
+    path('books/', include('books.url'))
 
 ]
 

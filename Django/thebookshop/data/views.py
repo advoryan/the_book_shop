@@ -1,7 +1,9 @@
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 from django.views.generic.base import TemplateView
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic.edit import DeleteView
+
 from .models import *
 from books.views import *
 from books.models import *
@@ -90,6 +92,19 @@ class SeriesCreateView(CreateView):
             return reverse_lazy("series-list-view")
         return reverse_lazy("series-create-view")
 
+class SeriesUpdateView(UpdateView):
+    model = Series
+    # template_name = 'data/Creation_form.html'
+    form_class = SeriesCreateForm
+
+class SeriesDeleteView(DeleteView):
+    success_url = reverse_lazy("series-detail-view")
+    model = Series
+    # template_name = 'data/Creation_form.html'
+    # form_class = SeriesCreateForm
+    template_name = "data/Delete_form.html"
+
+
 # template_name = "data/series_list.html"
         # def get_queryset(self):
         #     queryset = ["fgsdg", "sdfgsdfg", "gfdgs"]
@@ -130,22 +145,22 @@ class SeriesCreateView(CreateView):
         #     # context["ffff"] = self.abc
         #     return context
 
-class BooksView(ListView):
-    model = Book
-    def get_queryset(self):
-        qs = super().get_queryset()
-        search = self.request.GET.get("search", 0)
-        if search != 0:
-            return qs.filter(name__icontains=search)
-        return qs
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        f = SearchForm()
-        context["form"] = f       
-        return context
+# class BooksView(ListView):
+#     model = Book
+#     def get_queryset(self):
+#         qs = super().get_queryset()
+#         search = self.request.GET.get("search", 0)
+#         if search != 0:
+#             return qs.filter(name__icontains=search)
+#         return qs
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         f = SearchForm()
+#         context["form"] = f       
+#         return context
 
-class BooksDetail(DetailView):
-    model = Book
+# class BooksDetail(DetailView):
+#     model = Book
 
 class AuthorDetail(DetailView):
     model = Author
@@ -282,7 +297,7 @@ class BindingCreateView(CreateView):
         elif list1:
             return reverse_lazy("binding-list-view")
         return reverse_lazy("binding-create-view")
-
+ 
 class BookFormatDetail(DetailView):
     model = BookFormat
 

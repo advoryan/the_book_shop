@@ -40,15 +40,19 @@
             <form action="" method="get">
                     {{form}} <button type="submit">SEND</button>
             </form>
-
+            <tr><a href='{% url "series-list-view" %}'>View</a></tr>
         <tr>
             <th>Серия</th>
             <th>Описание</th>
+            <th>Действия</th>
         </tr>
     {% for object in object_list %}
         <tr>
             <th><a href="{% url 'series-detail-view' object.pk %}"> {{ object.name }} </a></th>
             <td>{{ object.description }}</td>
+            <td> <a href="{% url 'series-detail-view' object.pk %}">View</a></td>
+            <td> <a href="{% url 'series-update-view' object.pk %}">Update</a></td>
+            <td> <a href="{% url 'series-delete-view' object.pk %}">Delete</a></td>
         </tr>
     {% endfor %}
     </table>

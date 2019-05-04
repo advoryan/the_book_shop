@@ -42,6 +42,7 @@ DEFAULT_APPS = [
 MY_APPS = [
     'books',
     'data',
+    'crispy_form'
 ]
 
 INSTALLED_APPS = DEFAULT_APPS + MY_APPS
@@ -125,3 +126,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = '/static/'
+MEDIA_URL = '/media/'
+MEDIA_ROOT = '/media/'
+
+CRISPY_TEMPLATE_VIEW = # из документации
