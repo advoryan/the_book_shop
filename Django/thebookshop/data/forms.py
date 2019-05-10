@@ -12,29 +12,29 @@ class SearchForm(forms.Form):
 class SeriesCreateForm(ModelForm):
     class Meta:
         model = Series
-        fields = ('name', 'description') # без active
+        fields = '__all__'
 
 class AuthorCreateForm(ModelForm):
     class Meta:
         model = Author
-        fields = ('first_name', 'last_name', 'country')
+        fields = '__all__'
 
 class GenreCreateForm(ModelForm):
     class Meta:
         model = Genre
-        fields = ('name',)
+        fields = '__all__'
 
 class PublishCreateForm(ModelForm):
     class Meta:
         model = Publish
-        fields = ('name', 'country', 'city')
+        fields = '__all__'
 
 class BindingCreateForm(ModelForm):
     class Meta:
         model = Binding
-        fields = ('binding_type',)
+        fields = '__all__'
 
 class BookFormatCreateForm(ModelForm):
     class Meta:
         model = BookFormat
-        fields = ('size',)
+        fields = '__all__'

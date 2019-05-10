@@ -2,7 +2,6 @@ from django.db import models
 from books.models import Book
 from django.urls import reverse_lazy
 
-
 class Author(models.Model):
     first_name = models.CharField("Имя", null=False, blank=False, max_length=30)
     last_name = models.CharField("Фамилия", null=False, blank=False, max_length=30)
@@ -23,16 +22,10 @@ class Genre(models.Model):
 
 class Series(models.Model):
     active = models.BooleanField("Активный", default=True)
-    # success_url = ......
     name = models.CharField("Название", null=False, blank=False, max_length=30)
     description = models.TextField("Описание", null=True, blank=True)
-    
-    # def get_absolute_url(self): # для успешного перенаправления после создания 
-    #     return reverse_lazy('series-detail-view', kwargs={"pk": self.pk}) # или slak склеить вручную можнов
-
     def __str__(self):
         return self.name
-
     class Meta:
         verbose_name = 'Серия'
         verbose_name_plural = 'Серии'

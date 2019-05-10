@@ -1,49 +1,32 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
+{% extends "base.html" %}
+
+{% block title %}
     <title>Жанры</title>
-    <style type="text/css">
-        table {
-            font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
-            font-size: 14px;
-            border-collapse: collapse;
-            text-align: center;
-        }
-        th, td:first-child {
-            background: #AFCDE7;
-            color: white;
-            padding: 10px 20px;
-        }
-        th, td {
-            border-style: solid;
-            border-width: 0 1px 1px 0;
-            border-color: white;
-        }
-        td {
-            background: #D8E6F3;
-        }
-        th:first-child, td:first-child {
-            text-align: left;
-        }
-    </style>
-</head>
-<body>
-    <table cellpadding="10px">
+{% endblock %}
 
-        <form action="" method="get">
-        {{form}} <button type="submit">SEND</button>
-        </form>
+{% block nav_dymamic %}
+        <a href="{% url 'genre-create-view' %}" class="btn btn-outline-success text-light" role="button" aria-pressed="true"><img src="https://img.icons8.com/small/20/000000/plus.png"> Создать</a>
+{% endblock %}
 
+{% block content %}
+</br>
+<div class="d-flex justify-content-center">
+    <table class="table table-striped w-75">
         <tr>
             <th>Жанры</th>
+            <th>Действия</th>
         </tr>
     {% for object in object_list %}
         <tr>
-            <td><a href="{% url 'genre-detail-view' object.pk %}"> {{ object.name }} </a></td>
+            <th>{{ object.name }} </a></th>
+            <td>
+                <a href="{% url 'genre-detail-view' object.pk %}"><img src="https://img.icons8.com/ios-glyphs/20/000000/info.png">  </a>
+                <a href="{% url 'genre-update-view' object.pk %}"><img src="https://img.icons8.com/ios-glyphs/20/000000/edit.png">  </a>
+                <a href="{% url 'genre-delete-view' object.pk %}"><img src="https://img.icons8.com/ios-glyphs/20/000000/delete-sign.png">  </a>
+            </td>
         </tr>
     {% endfor %}
     </table>
-</body>
-</html>
+</div>
 
+{% endblock %}

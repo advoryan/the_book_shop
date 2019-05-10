@@ -1,9 +1,8 @@
 from django import forms
 from django.forms import ModelForm
-from data.models import *
-# ФОРМЫ КНИГИ
+from books.models import Book
 
-class SeriesCreateForm(ModelForm):
+class BookCreateForm(ModelForm):
     class Meta:
         model = Book
-        fields = ('name', 'image', 'description', 'price', 'author', 'rate') # без active
+        fields = '__all__'

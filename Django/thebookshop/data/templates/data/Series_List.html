@@ -1,46 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Серии</title>
-    <style type="text/css">
-        table {
-            font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
-            font-size: 14px;
-            border-collapse: collapse;
-            text-align: center;
-        }
-        th, td:first-child {
-            background: #AFCDE7;
-            color: white;
-            padding: 10px 20px;
-        }
-        th, td {
-            border-style: solid;
-            border-width: 0 1px 1px 0;
-            border-color: white;
-        }
-        td {
-            background: #D8E6F3;
-        }
-        th:first-child, td:first-child {
-            text-align: left;
-        }
+{% extends "base.html" %}
 
+{% block title %}
+    <title>Серия</title>
+{% endblock %}
 
-    .alert{color:red}
-    .form-group{margin: 10px 0;}
-    .form-group input{width:250px;height: 25px;border-radius:3px;}
+{% block nav_dymamic %}
+        <a href="{% url 'series-create-view' %}" class="btn btn-outline-success text-light" role="button" aria-pressed="true"><img src="https://img.icons8.com/small/20/000000/plus.png"> Создать</a>
+{% endblock %}
 
-    </style>
-</head>
-<body>
-    <table cellpadding="10px">
-
-            <form action="" method="get">
-                    {{form}} <button type="submit">SEND</button>
-            </form>
-            <tr><a href='{% url "series-list-view" %}'>View</a></tr>
+{% block content %}
+</br>
+<div class="d-flex justify-content-center">
+    <table class="table table-striped w-75">
         <tr>
             <th>Серия</th>
             <th>Описание</th>
@@ -50,12 +21,14 @@
         <tr>
             <th><a href="{% url 'series-detail-view' object.pk %}"> {{ object.name }} </a></th>
             <td>{{ object.description }}</td>
-            <td> <a href="{% url 'series-detail-view' object.pk %}">View</a></td>
-            <td> <a href="{% url 'series-update-view' object.pk %}">Update</a></td>
-            <td> <a href="{% url 'series-delete-view' object.pk %}">Delete</a></td>
+            <td> 
+                <a href="{% url 'series-detail-view' object.pk %}"><img src="https://img.icons8.com/ios-glyphs/20/000000/info.png">  </a>
+                <a href="{% url 'series-update-view' object.pk %}"><img src="https://img.icons8.com/ios-glyphs/20/000000/edit.png">  </a>
+                <a href="{% url 'series-delete-view' object.pk %}"><img src="https://img.icons8.com/ios-glyphs/20/000000/delete-sign.png">  </a>
+            </td>
         </tr>
     {% endfor %}
     </table>
-</body>
-</html>
+</div>
 
+{% endblock %}

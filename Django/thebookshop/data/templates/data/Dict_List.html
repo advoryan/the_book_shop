@@ -1,50 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Справочников справочников</title>
-    <style type="text/css">
-        table {
-            font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
-            font-size: 14px;
-            border-collapse: collapse;
-            text-align: center;
-        }
-        th, td:first-child {
-            background: #AFCDE7;
-            color: white;
-            padding: 10px 20px;
-        }
-        th, td {
-            border-style: solid;
-            border-width: 0 1px 1px 0;
-            border-color: white;
-        }
-        td {
-            background: #D8E6F3;
-        }
-        th:first-child, td:first-child {
-            text-align: left;
-        }
-    </style>
-</head>
-<body>
-    <table cellpadding="10px">
-        <tr>
-            <th>Справочники</th>
-        </tr>
-        <tr>
-            <tr><td><a href="{% url 'book-detail-view' %}">Книги</td></tr>
-            <tr><td><a href="{% url 'series-list-view' %}">Серии</td></tr>
-            <tr><td><a href="{% url 'author-list-view' %}">Авторы</td></tr>
-            <tr><td><a href="{% url 'genre-list-view' %}">Жанры</td></td>
-            <tr><td><a href="{% url 'publish-list-view' %}">Издательства</td></tr>
-            <tr><td><a href="{% url 'binding-list-view' %}">Переплеты</td></tr>
-            <tr><td><a href="{% url 'bookformat-list-view' %}">Форматы</td></tr>
+{% extends "base.html" %}
 
+{% block title %}
+    <title>Справочники</title>
+{% endblock %}
 
+{% block content %}
+</br>
+<div class="d-flex justify-content-center">
+    <table class="table table-striped w-75">
+        <tr>
+            <th>Фамилия</th>
+            <th>Имя</th>
+            <th>Страна</th>
+            <th>Действия</th>
         </tr>
+    {% for object in object_list %}
+        <tr><td><a href="{% url 'book-list-view' %}">Книги</td></tr>
+        <tr><td><a href="{% url 'series-list-view' %}">Серии</td></tr>
+        <tr><td><a href="{% url 'author-list-view' %}">Авторы</td></tr>
+        <tr><td><a href="{% url 'genre-list-view' %}">Жанры</td></td>
+        <tr><td><a href="{% url 'publish-list-view' %}">Издательства</td></tr>
+        <tr><td><a href="{% url 'binding-list-view' %}">Переплеты</td></tr>
+        <tr><td><a href="{% url 'bookformat-list-view' %}">Форматы</td></tr>
+    {% endfor %}
     </table>
-</body>
-</html>
+</div>
+
+{% endblock %}
+
+
+
 

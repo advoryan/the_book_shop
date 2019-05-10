@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block title %}
+    <title>Главная страница</title>
+{% endblock %}
+
+{% block content %}
+
+<div class="card-deck p-5">
+
+    {% for object in object_list %}
+
+<div class="card" style="width: 18rem;">
+
+    {% if object.image %}
+        <img src="{{ object.image.url }}" class="card-img-top" alt="{{ object.name }}"></img>
+    {% else %}
+        <img src="" class="card-img-top" alt="Нет фото"></img>
+    {% endif %}
+
+
+        <div class="card-body">
+            <h5 class="card-title">{{ object.name }}</h5>
+            <p class="card-text">
+                    {% for genre in object.genre.all %}
+                        {{ genre.name }}
+                    {% endfor %}
+                <br>
+                    {% for author in object.author.all %}
+                        {{ author.last_name}}
+                        {{ author.first_name }}, 
+                        {{ author.country }}
+                    {% endfor %}
+            </p>
+          <a href="{% url 'book-detail-view' object.pk %}" class="btn btn-primary">Купить</a>
+          <div class="card-footer bottom">
+                <small class="text-muted">{{ object.updated_date }}</small>
+          </div>
+        </div>
+</div>
+
+    {% endfor %}
+
+</div>
+
+{% endblock %}

@@ -1,51 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Серии</title>
-    <style type="text/css">
-        table {
-            font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
-            font-size: 14px;
-            border-collapse: collapse;
-            text-align: center;
-        }
-        th, td:first-child {
-            background: #AFCDE7;
-            color: white;
-            padding: 10px 20px;
-        }
-        th, td {
-            border-style: solid;
-            border-width: 0 1px 1px 0;
-            border-color: white;
-        }
-        td {
-            background: #D8E6F3;
-        }
-        th:first-child, td:first-child {
-            text-align: left;
-        }
+{% extends "base.html" %}
 
+{% block title %}
+    <title>Создание книги</title>
+{% endblock %}
 
-    .alert{color:red}
-    .form-group{margin: 10px 0;}
-    .form-group input{width:250px;height: 25px;border-radius:3px;}
+{% block nav_dymamic %}
+    <a href="{% url 'book-list-view' %}" class="btn btn-secondary active bg-dark text-light" role="button" aria-pressed="true">Отмена</a>
+{% endblock %}
 
-    </style>
-</head>
-<body>
-<a href="{% url 'book-create-view' %}">Создать книгу</a>
+{% block content %}
+
+    {% load crispy_forms_tags %}
+
+<div class="d-flex justify-content-center p-3">
     <form method="POST">
         {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Save and list" name="list">
-        <input type="submit" value="Save and detail" name="detail">
-        <input type="submit" value="Save and create" name="create">
+        {{ form|crispy }}
+
+        <input type="submit" value="Сохранить > Список" name="list">
+        <input type="submit" value="Сохранить > Детали" name="detail">
+        <input type="submit" value="Сохранить > Создать" name="create">
     </form>
+</div>
 
-
-
-</body>
-</html>
-
+{% endblock %}
