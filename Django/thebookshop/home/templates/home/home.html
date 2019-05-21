@@ -32,7 +32,7 @@
                         {{ author.country }}
                     {% endfor %}
             </p>
-          <a href="{% url 'book-detail-view' object.pk %}" class="btn btn-primary">Купить</a>
+            <a href="{% url 'add-to-cart' object.pk %}?next=/books/all" class="btn btn-success btn-sm">в корзину</a>
           <div class="card-footer bottom">
                 <small class="text-muted">{{ object.updated_date }}</small>
           </div>

@@ -41,6 +41,8 @@ MY_APPS = [
     'books',
     'data',
     'home',
+    'cart',
+    'order',
     'crispy_forms',
 ]
 

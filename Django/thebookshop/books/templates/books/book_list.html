@@ -21,6 +21,7 @@
             <th>Серия</th>
             <th>Жанр</th>
             <th>Действия</th>
+            <th></th>
         </tr>
     {% for object in object_list %}
         <tr>
@@ -43,6 +44,7 @@
               <a href="{% url 'book-update-view' object.pk %}"><img src="https://img.icons8.com/ios-glyphs/20/000000/edit.png">  </a>
               <a href="{% url 'book-delete-view' object.pk %}"><img src="https://img.icons8.com/ios-glyphs/20/000000/delete-sign.png">  </a>
           </td>
+          <td><a href="{% url 'add-to-cart' object.pk %}?next=/books/all" class="btn btn-success btn-sm">в корзину</a></td>
         </tr>
     {% endfor %}
     </table>

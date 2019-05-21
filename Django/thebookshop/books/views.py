@@ -5,7 +5,7 @@ from django.views.generic.base import TemplateView
 from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic.edit import DeleteView
 from books.models import Book
-from books.forms import BookCreateForm
+from books.forms import BookCreateForm, SearchForm
 from django.urls import reverse_lazy
 
 class BookDetailView(DetailView):
@@ -13,6 +13,17 @@ class BookDetailView(DetailView):
 
 class BookListView(ListView):
     model = Book
+    def get_queryset(self):
+        qs = super().get_queryset()
+        search = self.request.GET.get("search", 0)
+        if search != 0:
+            return qs.filter(name__icontains=search)
+        return qs
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        f = SearchForm()
+        context["form"] = f       
+        return context
 
 class BookCreateView(CreateView):
     model = Book
@@ -32,6 +43,10 @@ class BookUpdateView(UpdateView):
     model = Book
     form_class = BookCreateForm
     template_name = "data/Delete_form.html"
+    def get_success_url(self):
+        if self.request.POST.get('detail'):
+            return reverse_lazy('book-detail-view', kwargs={'pk': self.object.pk})
+        return reverse_lazy('book-list-view')
 
 class BookDeleteView(DeleteView):
     success_url = reverse_lazy("book-list-view")

@@ -7,6 +7,7 @@ from .models import *
 from books.views import *
 from books.models import *
 from .forms import *
+from data.forms import *
 from django.db.models import Q
 from django.urls import reverse_lazy
 
@@ -29,7 +30,7 @@ class SeriesView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         f = SearchForm()
-        context["form"] = f       
+        context["book_id"] = self.kwargs.get("pk")       
         return context
 
 class SeriesCreateView(CreateView):
