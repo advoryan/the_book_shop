@@ -11,6 +11,7 @@ from data.forms import *
 from django.db.models import Q
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import PermissionRequiredMixin
+from django.contrib.auth.decorators import login_required
 
 
 class SeriesDetail(DetailView):
@@ -20,6 +21,7 @@ class SeriesDetail(DetailView):
         print(self, kwargs)
         return context
 
+@login_required
 class SeriesView(PermissionRequiredMixin, ListView):
     model = Series
     permission_required = 'books.edit-content'
@@ -37,6 +39,7 @@ class SeriesView(PermissionRequiredMixin, ListView):
         context["book_id"] = self.kwargs.get("pk")       
         return context
 
+@login_required
 class SeriesCreateView(PermissionRequiredMixin, CreateView):
     model = Series
     template_name = 'data/Creation_form.html'
@@ -54,6 +57,7 @@ class SeriesCreateView(PermissionRequiredMixin, CreateView):
             return reverse_lazy("series-list-view")
         return reverse_lazy("series-create-view")
 
+@login_required
 class SeriesUpdateView(PermissionRequiredMixin, UpdateView):
     model = Series
     template_name = 'data/Update_form.html'
@@ -65,6 +69,7 @@ class SeriesUpdateView(PermissionRequiredMixin, UpdateView):
             return reverse_lazy('series-detail-view', kwargs={'pk': self.object.pk})
         return reverse_lazy('series-list-view')
 
+@login_required
 class SeriesDeleteView(PermissionRequiredMixin, DeleteView):
     success_url = reverse_lazy("series-list-view")
     model = Series
