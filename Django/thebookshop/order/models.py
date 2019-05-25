@@ -22,6 +22,7 @@ class Order(models.Model):
         null=True,
         blank=True,
         help_text="name@email.com")
+
     phone = models.CharField(
         verbose_name="Контактный телефон",
         help_text="+375(29)3-718-718",
@@ -38,8 +39,9 @@ class Order(models.Model):
         auto_now_add=False)
 
     def __str__(self):
-        return "Заказ № {}".format(self.cart.pk)
+        return "Заказ № {}, {}".format(self.pk, self.created_day)
 
     class Meta:
         verbose_name = 'Заказ'
         verbose_name_plural = 'Заказы'
+

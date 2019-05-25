@@ -38,6 +38,14 @@
     </div>
 
     {% block nav_dymamic %}{% endblock %}
+    
+    {% if user.is_authenticated %}
+    Welcome, {{ user }}!
+    <a href="{% url 'log-out' %}{% if logout_redirect %}?next={{ logout_redirect }}{% endif %}" class="btn btn-primary ml-sm-2 mr-sm-2">Log out</a>
+    {% endif %}
+    {% if user.is_anonymous %}
+    <a href="{% url 'log-in' %}{% if logout_redirect %}?next={{ logout_redirect }}{% endif %}" class="btn btn-primary ml-sm-2 mr-sm-2">Log in</a>
+    {% endif %}
 
     <form class="form-inline mt-2 mt-md-0">
         <input class="form-control mr-sm-2" type="search" name="search" placeholder="Search" aria-label="Search">

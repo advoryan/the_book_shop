@@ -4,8 +4,20 @@ from data.models import Author
 from django.db.models import Q
 from django.views.generic.list import ListView
 from data.forms import *
-import operator
+# import operator
+# from django.contrib.auth import views as auth_views
+from django.contrib.auth.views import LoginView, LogoutView
 # from django.urls import reverse_lazy
+
+
+# импорт библиотек !!!!!!!!!! + User ----- для аутентификации
+# def home(request):
+# 	result = []
+# 	context ={"accounts": result}
+# 	# user = User.objects.get(pk=2)
+# 	# login(request, user)
+# return  render (request, "home.html", context)
+
 
 class HomeListView(ListView):
     model = Book
@@ -35,3 +47,8 @@ class HomeListView(ListView):
         context["form"] = f
         return context
 
+class LogInView(LoginView):
+    template_name = 'home/login.html'
+
+class LogOutView(LogoutView):
+    extra_context = 'none'

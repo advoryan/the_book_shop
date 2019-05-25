@@ -10,6 +10,8 @@ from .forms import *
 from data.forms import *
 from django.db.models import Q
 from django.urls import reverse_lazy
+from django.contrib.auth.mixins import PermissionRequiredMixin
+
 
 class SeriesDetail(DetailView):
     model = Series
@@ -18,8 +20,10 @@ class SeriesDetail(DetailView):
         print(self, kwargs)
         return context
 
-class SeriesView(ListView):
+class SeriesView(PermissionRequiredMixin, ListView):
     model = Series
+    permission_required = 'books.edit-content'
+
     def get_queryset(self):
         qs = super().get_queryset()
         # active = self.request.GET.get("on", False)
@@ -33,10 +37,12 @@ class SeriesView(ListView):
         context["book_id"] = self.kwargs.get("pk")       
         return context
 
-class SeriesCreateView(CreateView):
+class SeriesCreateView(PermissionRequiredMixin, CreateView):
     model = Series
     template_name = 'data/Creation_form.html'
     form_class = SeriesCreateForm
+    permission_required = 'books.edit-content'
+
     def get_success_url(self):
         # new_url = super().get_success_url() - не обязательно надо, пользуемся родителем
         detail1 = self.request.POST.get("detail")
@@ -48,19 +54,22 @@ class SeriesCreateView(CreateView):
             return reverse_lazy("series-list-view")
         return reverse_lazy("series-create-view")
 
-class SeriesUpdateView(UpdateView):
+class SeriesUpdateView(PermissionRequiredMixin, UpdateView):
     model = Series
     template_name = 'data/Update_form.html'
     form_class = SeriesCreateForm
+    permission_required = 'books.edit-content'
+
     def get_success_url(self):
         if self.request.POST.get('detail'):
             return reverse_lazy('series-detail-view', kwargs={'pk': self.object.pk})
         return reverse_lazy('series-list-view')
 
-class SeriesDeleteView(DeleteView):
+class SeriesDeleteView(PermissionRequiredMixin, DeleteView):
     success_url = reverse_lazy("series-list-view")
     model = Series
     template_name = "data/Delete_form.html"
+    permission_required = 'books.edit-content'
 
 
 class AuthorDetail(DetailView):

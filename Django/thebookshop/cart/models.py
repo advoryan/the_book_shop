@@ -23,7 +23,7 @@ class Cart(models.Model):
         auto_now_add=False)
 
     def __str__(self):
-        return "Корзина {}, {}".format(self.pk, self.user)
+        return "Корзина {}, {}, {}".format(self.pk, self.user, self.created_day)
 
     @property
     def books_in_cart_count(self):
@@ -44,29 +44,30 @@ class Cart(models.Model):
         verbose_name_plural = 'Корзины'
 
 class BookInCart(models.Model):
+
     cart = models.ForeignKey(
         Cart,
         on_delete=models.CASCADE,
         verbose_name='Корзина',
-        related_name='user_cart'
-        )
+        related_name='user_cart')
+
     book = models.ForeignKey(
         Book,
         on_delete=models.CASCADE,
         verbose_name='Товар',
-        related_name='book_in_cart'
-        )
+        related_name='book_in_cart')
+        
     quantity = models.IntegerField(
-        "Количество"
-        )
+        "Количество")
+
     def __str__(self):
-        return self.books.name
+        return self.book.name
 
     @property
     def price_total(self):
-        return self.books.price * self.quantity
+        return book.price * self.quantity
 
     class Meta:
         verbose_name = 'Товар'
         verbose_name_plural = 'Товары'
-        unique_together = [['cart', 'book']]
+        unique_together = [['cart', 'book']] # Чтобы не повторялись. Уникальные сочетания

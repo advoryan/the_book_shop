@@ -7,6 +7,7 @@ from django.views.generic.edit import DeleteView
 from books.models import Book
 from books.forms import BookCreateForm, SearchForm
 from django.urls import reverse_lazy
+from django.contrib.auth.mixins import PermissionRequiredMixin
 
 class BookDetailView(DetailView):
     model = Book
@@ -25,10 +26,12 @@ class BookListView(ListView):
         context["form"] = f       
         return context
 
-class BookCreateView(CreateView):
+class BookCreateView(PermissionRequiredMixin, CreateView):
     model = Book
     template_name = 'data/Creation_form.html'
     form_class = BookCreateForm
+    permission_required = 'books.edit-content'
+
     def get_success_url(self):
         detail1 = self.request.POST.get("detail")
         list1 = self.request.POST.get("list")
@@ -39,15 +42,18 @@ class BookCreateView(CreateView):
             return reverse_lazy("book-list-view")
         return reverse_lazy("book-create-view")
 
-class BookUpdateView(UpdateView):
+class BookUpdateView(PermissionRequiredMixin, UpdateView):
     model = Book
     form_class = BookCreateForm
     template_name = "data/Delete_form.html"
+    permission_required = 'books.edit-content'
+
     def get_success_url(self):
         if self.request.POST.get('detail'):
             return reverse_lazy('book-detail-view', kwargs={'pk': self.object.pk})
         return reverse_lazy('book-list-view')
 
-class BookDeleteView(DeleteView):
+class BookDeleteView(PermissionRequiredMixin, DeleteView):
     success_url = reverse_lazy("book-list-view")
     model = Book
+    permission_required = 'books.edit-content'

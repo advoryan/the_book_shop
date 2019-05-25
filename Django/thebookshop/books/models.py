@@ -1,5 +1,4 @@
 from django.db import models
-from .models import *
 
 class Book(models.Model):
     name = models.CharField(
@@ -119,3 +118,4 @@ class Book(models.Model):
     class Meta:
         verbose_name = 'Книга'
         verbose_name_plural = 'Книги'
+        permissions = [('edit-content', 'for content-managers'), ('edit-order', 'for edit-managers'), ('market', 'for marketers')]
