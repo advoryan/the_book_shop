@@ -13,7 +13,6 @@ class Book(models.Model):
         null=True,
         blank=True)
 
-    # можно выбрать несколько авторов
     author = models.ManyToManyField(
         "data.Author",
         related_name="books",
@@ -22,9 +21,8 @@ class Book(models.Model):
     price = models.DecimalField(
         "Цена",
         max_digits=5,
-        decimal_places=2)  # decimal_places - количество нулей после запятой
+        decimal_places=2)
 
-    # можно выбрать одну серию
     serie = models.ForeignKey(
         "data.Series",
         related_name="books",
@@ -33,7 +31,6 @@ class Book(models.Model):
         # blank=True,
         on_delete=models.CASCADE)
 
-    # можно выбрать несколько жанров
     genre = models.ManyToManyField(
         "data.Genre",
         related_name="books",
@@ -111,9 +108,6 @@ class Book(models.Model):
 
     def __str__(self):
         return self.name
-
-    def new(self):
-        return str(self.price + self.year) # Добавялем новое отображение (в template object.new)
 
     class Meta:
         verbose_name = 'Книга'

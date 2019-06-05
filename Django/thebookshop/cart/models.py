@@ -65,7 +65,7 @@ class BookInCart(models.Model):
 
     @property
     def price_total(self):
-        return book.price * self.quantity
+        return self.book.price * self.quantity
 
     class Meta:
         verbose_name = 'Товар'

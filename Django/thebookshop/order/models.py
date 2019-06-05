@@ -39,7 +39,7 @@ class Order(models.Model):
         auto_now_add=False)
 
     def __str__(self):
-        return "Заказ № {}, {}".format(self.pk, self.created_day)
+        return "Заказ № {}, {}".format(self.cart.pk, self.created_day)
 
     class Meta:
         verbose_name = 'Заказ'

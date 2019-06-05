@@ -21,7 +21,7 @@ class BookListView(ListView):
             return qs.filter(name__icontains=search)
         return qs
     def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
+        context = super().get_cntext_data(**kwargs)
         f = SearchForm()
         context["form"] = f       
         return context

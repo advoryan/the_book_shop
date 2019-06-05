@@ -12,7 +12,8 @@ from data.models import OrderStatus
 from order.forms import CheckOutOrderForm
 from django.contrib.auth import authenticate, login
 
-# new_order_status = OrderStatus.objects.get(pk=1)
+new_order_status = OrderStatus.objects.get(pk=1)
+# cart, created = OrderStatus.get_or_create(pk=1)
 
 class AddBookToChartView(UpdateView):
     template_name = "cart/add-product.html"
