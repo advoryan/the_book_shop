@@ -10,6 +10,7 @@ from cart.models import BookInCart, Cart, User
 from .forms import AddBookForm 
 from data.models import OrderStatus
 from order.forms import CheckOutOrderForm
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import authenticate, login
 
 new_order_status = OrderStatus.objects.get(pk=1)
@@ -29,8 +30,10 @@ class AddBookToChartView(UpdateView):
         else:
             user = self.request.user
 
-        cart, created = Cart.objects.get_or_create(pk=cart_id, defaults={'user': self.request.user}) #sdfdsdsfsdf
+        # cart, created = Cart.objects.get_or_create(pk=cart_id, defaults={'user': self.request.user}) #sdfdsdsfsdf
+        cart, created = Cart.objects.get_or_create(pk=cart_id, defaults={'user': user}) #sdfdsdsfsdf
         self.request.session['cart_id'] = cart.pk
+        print(self.request.session['cart_id'])
         book_pk = self.kwargs.get('pk')
         book = Book.objects.get(pk=book_pk)
         book_in_cart, created = self.model.objects.get_or_create(cart=cart, book=book, defaults={'quantity': 1})
@@ -39,12 +42,18 @@ class AddBookToChartView(UpdateView):
         return book_in_cart
         
     def get_context_data(self, **kwargs):
-        content = super().get_context_data(*kwargs)
-        content["book_id"] = self.kwargs.get("pk")###################################33
-        content["next"] = self.kwargs.get("next", "/")
-        return content
+        context = super().get_context_data(**kwargs)
+        context['next'] = self.request.GET.get('next', '/')
+        return context
 
     def get_success_url(self):
+        if self.request.POST.get('back'):
+            product = self.model.objects.get(pk=self.object.pk)
+            if product.quantity > 1:
+                product.quantity -= 1
+                product.save()
+            else:
+                product.delete()
         return self.request.POST.get('next', '/')
 
 
@@ -69,4 +78,21 @@ class CartView(DetailView):
         context['form'] = checkout_form
         print(context)
         return context
+
+class CartUserList(LoginRequiredMixin, ListView):
+    model = Cart
+    template_name = 'cart/cart_user_list.html'
+    login_url = '/auth/login'
+
+    def get_queryset(self, **kwargs):
+        qs = super().get_queryset(**kwargs)
+        current_user = self.request.user
+        return qs.filter(user=current_user)
+
+class DeleteBookFromCart(DeleteView):
+    model = BookInCart
+    template_name = 'cart/delete-book.html'
+
+    def get_success_url(self):
+        return reverse_lazy('view-cart')
 

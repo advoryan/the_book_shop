@@ -6,7 +6,7 @@ from django.views.generic.list import ListView
 from data.forms import *
 # import operator
 # from django.contrib.auth import views as auth_views
-from django.contrib.auth.views import LoginView, LogoutView
+# from django.contrib.auth.views import LoginView, LogoutView
 # from django.urls import reverse_lazy
 
 
@@ -47,8 +47,8 @@ class HomeListView(ListView):
         context["form"] = f
         return context
 
-class LogInView(LoginView):
-    template_name = 'home/login.html'
+# class LogInView(LoginView):
+#     template_name = 'home/login.html'
 
-class LogOutView(LogoutView):
-    extra_context = 'none'
+# class LogOutView(LogoutView):
+#     extra_context = 'none'

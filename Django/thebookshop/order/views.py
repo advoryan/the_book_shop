@@ -22,10 +22,10 @@ class OrderSuccess(DetailView):
     model = Order
     template_name = 'order/order-success.html'
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        if self.object.cart.user.pk == self.request.user.pk:
-            return context
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     if self.object.cart.user.pk == self.request.user.pk:
+    #         return context
 
 
 class OrderList(PermissionRequiredMixin, ListView):

@@ -43,6 +43,7 @@ MY_APPS = [
     'home',
     'cart',
     'order',
+    'alog',
     'crispy_forms',
 ]
 
@@ -63,7 +64,7 @@ ROOT_URLCONF = 'thebookshop.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ["templates"],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

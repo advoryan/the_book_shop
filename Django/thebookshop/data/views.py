@@ -39,11 +39,11 @@ class SeriesView(ListView):
         context["book_id"] = self.kwargs.get("pk")       
         return context
 
-class SeriesCreateView(CreateView):
+class SeriesCreateView(PermissionRequiredMixin, CreateView):
     model = Series
     template_name = 'data/Creation_form.html'
     form_class = SeriesCreateForm
-    # permission_required = 'books.edit-content'
+    permission_required = 'books.edit-content'
 
     def get_success_url(self):
         # new_url = super().get_success_url() - не обязательно надо, пользуемся родителем
@@ -60,7 +60,7 @@ class SeriesUpdateView(PermissionRequiredMixin, UpdateView):
     model = Series
     template_name = 'data/Update_form.html'
     form_class = SeriesCreateForm
-    # permission_required = 'books.edit-content'
+    permission_required = 'books.edit-content'
 
     def get_success_url(self):
         if self.request.POST.get('detail'):
@@ -72,7 +72,7 @@ class SeriesDeleteView(PermissionRequiredMixin, DeleteView):
     success_url = reverse_lazy("series-list-view")
     model = Series
     template_name = "data/Delete_form.html"
-    # permission_required = 'books.edit-content'
+    permission_required = 'books.edit-content'
 
 
 class AuthorDetail(DetailView):

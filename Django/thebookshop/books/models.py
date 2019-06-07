@@ -27,8 +27,8 @@ class Book(models.Model):
         "data.Series",
         related_name="books",
         verbose_name="Серия",
-        # null=True,
-        # blank=True,
+        null=True,
+        blank=True,
         on_delete=models.CASCADE)
 
     genre = models.ManyToManyField(
