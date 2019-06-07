@@ -9,3 +9,8 @@ class BookCreateForm(ModelForm):
     class Meta:
         model = Book
         fields = '__all__'
+
+class BookUpdateForm(ModelForm):
+    class Meta:
+        model = Book
+        fields = '__all__'

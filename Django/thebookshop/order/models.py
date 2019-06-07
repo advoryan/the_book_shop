@@ -39,6 +39,10 @@ class Order(models.Model):
         auto_now=True,
         auto_now_add=False)
 
+    canceled = models.BooleanField(
+        "Отменен",
+        default = False)
+
     def __str__(self):
         return "Заказ № {}, {}".format(self.cart.pk, self.created_day)
 

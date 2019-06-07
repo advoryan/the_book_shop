@@ -50,6 +50,15 @@
                 <th colspan="4">{{ object.delivery_address }}</th>
             </tr>
         </table>
-  
+    {% if object.status.pk == 1 and object.canceled == False %}
+        <a href="{% url 'order-canceled' object.pk %}" class="btn btn-danger">Отменить заказ</a>
+    {% endif %}
+    {% if object.canceled == True %}
+<h3> Данный заказ был отменен!!! </h3>
+    {% endif %}
+
+    {% if user.is_authenticated %}
+        <a href="{% url 'cart-user-list' %}" class="btn btn-primary">К списку заказов</a>
+    {% endif %}
     </div>
 {% endblock %}

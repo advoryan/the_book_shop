@@ -1,26 +1,27 @@
 {% extends "base.html" %}
 
 {% block title %}
-    <title>Создание книги</title>
+    <title>Создание</title>
 {% endblock %}
 
 {% block nav_dymamic %}
-    <a href="{% url 'book-list-view' %}" class="btn btn-secondary active bg-dark text-light" role="button" aria-pressed="true">Отмена</a>
+    <a href="{% url 'home-list-view' %}" class="btn btn-secondary active bg-dark text-light" role="button" aria-pressed="true">Отмена</a>
 {% endblock %}
 
 {% block content %}
-{% load static %}
+
     {% load crispy_forms_tags %}
 
 <div class="d-flex justify-content-center p-3">
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
-        {{ form|crispy }}
+        {{ form.as_p }}
 
         <input type="submit" value="Сохранить > Список" name="list">
         <input type="submit" value="Сохранить > Детали" name="detail">
         <input type="submit" value="Сохранить > Создать" name="create">
     </form>
 </div>
-
+<br>
+<br>
 {% endblock %}

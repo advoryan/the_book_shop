@@ -63,7 +63,7 @@
     <a href="{% url 'log-in' %}{% if logout_redirect %}?next={{ logout_redirect }}{% endif %}" class="btn btn-primary ml-sm-2 mr-sm-2">Log in</a>
     {% endif %}
 
-    <a href="{% url 'view-cart' %}" class="btn btn-warning ml-sm-2">Моя корзина {{ quantity }}</a>
+    <a href="{% url 'view-cart' %}" class="btn btn-outline-success text-light">Моя корзина {{ quantity }}</a>
 
     <form class="form-inline mt-2 mt-md-0">
         <input class="form-control mr-sm-2" type="search" name="search" placeholder="Search" aria-label="Search">

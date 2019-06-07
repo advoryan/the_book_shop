@@ -5,7 +5,7 @@ from django.views.generic.base import TemplateView
 from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic.edit import DeleteView
 from books.models import Book
-from books.forms import BookCreateForm, SearchForm
+from books.forms import BookCreateForm, SearchForm, BookUpdateForm
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import PermissionRequiredMixin
 
@@ -44,8 +44,8 @@ class BookCreateView(PermissionRequiredMixin, CreateView):
 
 class BookUpdateView(PermissionRequiredMixin, UpdateView):
     model = Book
-    form_class = BookCreateForm
-    template_name = "data/Delete_form.html"
+    form_class = BookUpdateForm
+    template_name = "books/book_update.html"
     permission_required = 'books.edit-content'
 
     def get_success_url(self):
