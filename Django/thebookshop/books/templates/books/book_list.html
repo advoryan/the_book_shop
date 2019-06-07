@@ -4,9 +4,13 @@
     <title>Книги</title>
 {% endblock %}
 
+
 {% block nav_dymamic %}
+{% if perms.books.edit_content %}
     <a href="{% url 'book-create-view' %}" class="btn btn-outline-success text-light" role="button" aria-pressed="true"><img src="https://img.icons8.com/small/20/000000/plus.png"> Создать</a>
+{% endif %}
 {% endblock %}
+
 
 {% block content %}
 </br>
@@ -20,7 +24,9 @@
             <th>Автор</th>
             <th>Серия</th>
             <th>Жанр</th>
+        {% if perms.books.edit_content %}
             <th>Действия</th>
+        {% endif %}
             <th></th>
         </tr>
     {% for object in object_list %}
@@ -39,11 +45,13 @@
                 {{ object.name }}</br>
               {% endfor %}
           </td>
+          {% if perms.books.edit_content %}
           <td>
               <a href="{% url 'book-detail-view' object.pk %}"><img src="https://img.icons8.com/ios-glyphs/20/000000/info.png">  </a>
               <a href="{% url 'book-update-view' object.pk %}"><img src="https://img.icons8.com/ios-glyphs/20/000000/edit.png">  </a>
               <a href="{% url 'book-delete-view' object.pk %}"><img src="https://img.icons8.com/ios-glyphs/20/000000/delete-sign.png">  </a>
           </td>
+          {% endif %}
           <td><a href="{% url 'add-to-cart' object.pk %}?next=/books/all" class="btn btn-success btn-sm">в корзину</a></td>
         </tr>
     {% endfor %}

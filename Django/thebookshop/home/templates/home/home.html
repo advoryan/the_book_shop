@@ -6,12 +6,11 @@
 
 {% block content %}
 
-
 <div class="card-deck p-5">
 
     {% for object in object_list %}
 
-<div class="card" style="width: 18rem;">
+    <div class="card" style="width: 18rem;">
 
     {% if object.image %}
         <img src="{{ object.image.url }}" class="card-img-top" alt="{{ object.name }}"></img>
@@ -35,8 +34,8 @@
             <a href="{% url 'add-to-cart' object.pk %}?next=/books/all" class="btn btn-success btn-sm">в корзину</a>
           <div class="card-footer bottom">
                 <small class="text-muted">{{ object.updated_date }}</small>
-          </div>
         </div>
+    </div>
 </div>
 
     {% endfor %}

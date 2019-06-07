@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-
+{% load custom_filters_cart %}
 
 {% block title %}Заказы{% endblock %}
 
@@ -27,6 +27,7 @@
                             </td>
                             <td>
                                 {{ product.status }}
+                                <p class="text-danger font-weight-bold">{{ product.canceled|filter_canceled }}</p>
                             </td>
                         {% endfor %}
                         <td>

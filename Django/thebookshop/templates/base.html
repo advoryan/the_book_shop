@@ -23,6 +23,8 @@
 
     <a href="{% url 'home-list-view' %}" class="btn btn-secondary active bg-dark text-light" role="button" aria-pressed="true">На главную</a>
     <a href="{% url 'book-list-view' %}" class="btn btn-secondary active bg-dark text-light" role="button" aria-pressed="true">Список книг</a>
+
+  {% if perms.books.edit_content %}
     <div class="dropdown">
             <button class="btn btn-secondary dropdown-toggle bg-dark" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Справочники
@@ -36,13 +38,14 @@
               <a class="dropdown-item" href="{% url 'bookformat-list-view' %}">Форматы</a>
             </div>
     </div>
+  {% endif %}
 
     {% block nav_dymamic %}{% endblock %}
     
     {% if user.is_authenticated %}
     Welcome, {{ user }}!
     <div class="dropdown mr-sm-2">
-      <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <a class="btn btn-secondary dropdown-toggle bg-dark" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       {{ user }}
       </a>
       <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
@@ -60,6 +63,7 @@
     <a href="{% url 'log-in' %}{% if logout_redirect %}?next={{ logout_redirect }}{% endif %}" class="btn btn-primary ml-sm-2 mr-sm-2">Log in</a>
     {% endif %}
 
+    <a href="{% url 'view-cart' %}" class="btn btn-warning ml-sm-2">Моя корзина {{ quantity }}</a>
 
     <form class="form-inline mt-2 mt-md-0">
         <input class="form-control mr-sm-2" type="search" name="search" placeholder="Search" aria-label="Search">
