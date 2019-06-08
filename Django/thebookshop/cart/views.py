@@ -79,15 +79,16 @@ class CartView(DetailView):
         print(context)
         return context
 
-class CartUserList(LoginRequiredMixin, ListView):
+class CartUserList(ListView): #LoginRequiredMixin,
     model = Cart
-    template_name = 'cart/cart_user_list.html'
-    login_url = '/auth/login'
+    # template_name = 'cart/cart_user_list.html'
+    template_name = 'cart/view-cart.html'
+    # login_url = '/alog/login'
 
-    def get_queryset(self, **kwargs):
-        qs = super().get_queryset(**kwargs)
-        current_user = self.request.user
-        return qs.filter(user=current_user)
+    # def get_queryset(self, **kwargs):
+    #     qs = super().get_queryset(**kwargs)
+    #     current_user = self.request.user
+    #     return qs.filter(user=current_user)
 
 class DeleteBookFromCart(DeleteView):
     model = BookInCart

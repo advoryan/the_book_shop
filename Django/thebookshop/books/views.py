@@ -30,7 +30,7 @@ class BookCreateView(PermissionRequiredMixin, CreateView):
     model = Book
     template_name = 'data/Creation_form.html'
     form_class = BookCreateForm
-    permission_required = 'books.edit-content'
+    permission_required = 'books.edit'
 
     def get_success_url(self):
         detail1 = self.request.POST.get("detail")
@@ -46,7 +46,7 @@ class BookUpdateView(PermissionRequiredMixin, UpdateView):
     model = Book
     form_class = BookUpdateForm
     template_name = "books/book_update.html"
-    permission_required = 'books.edit-content'
+    permission_required = 'books.edit'
 
     def get_success_url(self):
         if self.request.POST.get('detail'):
@@ -57,4 +57,4 @@ class BookDeleteView(PermissionRequiredMixin, DeleteView):
     success_url = reverse_lazy("book-list-view")
     template_name = 'books/book_delete.html'
     model = Book
-    permission_required = 'books.edit-content'
+    permission_required = 'books.edit'

@@ -24,7 +24,7 @@
     <a href="{% url 'home-list-view' %}" class="btn btn-secondary active bg-dark text-light" role="button" aria-pressed="true">На главную</a>
     <a href="{% url 'book-list-view' %}" class="btn btn-secondary active bg-dark text-light" role="button" aria-pressed="true">Список книг</a>
 
-  {% if perms.books.edit_content %}
+  {% if perms.books.edit %}
     <div class="dropdown">
             <button class="btn btn-secondary dropdown-toggle bg-dark" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Справочники
