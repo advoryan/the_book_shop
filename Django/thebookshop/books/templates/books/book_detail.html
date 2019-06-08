@@ -5,27 +5,70 @@
 {% endblock %}
 
 {% block content %}
-
-<table>
-
-<tr>
-    <td>{{ object.name }}</td>
-</tr>
-<tr>
-    <img src="{{ object.image.url }}" style="width: 26rem;" alt="Картинка не загрузилась"></img>
-    <td>{{ object.image }}</td>
-</tr>
-<tr>
-    <td>{{ object.author }}</td>
-</tr>
-<tr>
-    <td>{{ object.price }}</td>
-</tr>
-<tr>
-    <td>{{ object.genre }}</td>
-</tr>
+</br>
+<div class="d-flex justify-content-center">
 
 
-</table>
+    <table class="table table-striped w-100">
+<tr>
+
+    <img src="{{ object.image.url }}" style="width: 50rem;" alt="Картинка не загрузилась"></img>
+
+</tr>
+            <tr>
+                <td>Название</td>
+                <td>{{ object.name }}</td>
+            </tr>
+            <tr>
+                <td>Авторы</td>
+                <td>{% for author in object.author.all %}
+                        {{ author.last_name}}
+                        {{ author.first_name }}, 
+                        {{ author.country }}
+                    {% endfor %}</td>
+            </tr>
+            <tr>
+                <td>Жанр</td>
+                <td>{% for genre in object.genre.all %}
+                        {{ genre.name }}
+                    {% endfor %}</td>
+            </tr>
+            <tr>
+                <td>Издательство</td>
+                <td>{{ object.publish }}</td>
+            </tr>
+            <tr>
+                    <td>Год</td>
+                    <td>{{ object.year }}</td>
+            </tr>
+            <tr>
+                    <td>Переплет</td>
+                    <td>{{ object.bind }}</td>
+            </tr>
+            <tr>
+                    <td>Формат</td>
+                    <td>{{ object.book_format }}</td>
+            </tr>
+            <tr>
+                    <td>Доступно</td>
+                    <td>{{ object.book_amount }}</td>
+            </tr>
+            <tr>
+                    <td>Рейтинг</td>
+                    <td>{{ object.rate }}</td>
+            </tr>
+            <tr>
+                    <th>Цена</th>
+                    <th>{{ object.price }}</th>
+            </tr>
+            <tr>
+            <th>
+            <a href="{% url 'add-to-cart' object.pk %}?next=/books/all" class="btn btn-success btn-sm">в корзину</a>
+            </th>
+            <th></th>
+        </tr>
+
+    </table>
+</div>
 
 {% endblock %}

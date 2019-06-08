@@ -11,6 +11,7 @@ from django.contrib.auth.mixins import PermissionRequiredMixin
 
 class BookDetailView(DetailView):
     model = Book
+    template_name = 'books/book_detail.html'
 
 class BookListView(ListView):
     model = Book

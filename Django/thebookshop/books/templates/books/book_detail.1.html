@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}
+    <title>{{ object.name }}</title>
+{% endblock %}
+
+{% block content %}
+
+<table>
+
+<tr>
+    <td>{{ object.name }}</td>
+</tr>
+<tr>
+    <img src="{{ object.image.url }}" style="width: 26rem;" alt="Картинка не загрузилась"></img>
+    <td>{{ object.image }}</td>
+</tr>
+<tr>
+    <td>{{ object.author }}</td>
+</tr>
+<tr>
+    <td>{{ object.price }}</td>
+</tr>
+<tr>
+    <td>{{ object.genre }}</td>
+</tr>
+
+
+</table>
+
+{% endblock %}
